@@ -1,0 +1,10 @@
+C:\Users\Zeles\source\repos\NetProg6\Server\bin\Release\Server.exe.config
+C:\Users\Zeles\source\repos\NetProg6\Server\bin\Release\Server.exe
+C:\Users\Zeles\source\repos\NetProg6\Server\bin\Release\Server.pdb
+C:\Users\Zeles\source\repos\NetProg6\Server\bin\Release\System.ServiceModel.Primitives.dll
+C:\Users\Zeles\source\repos\NetProg6\Server\bin\Release\System.ServiceModel.Primitives.pdb
+C:\Users\Zeles\source\repos\NetProg6\Server\obj\Release\Server.csprojAssemblyReference.cache
+C:\Users\Zeles\source\repos\NetProg6\Server\obj\Release\Server.csproj.CoreCompileInputs.cache
+C:\Users\Zeles\source\repos\NetProg6\Server\obj\Release\Server.csproj.CopyComplete
+C:\Users\Zeles\source\repos\NetProg6\Server\obj\Release\Server.exe
+C:\Users\Zeles\source\repos\NetProg6\Server\obj\Release\Server.pdb

@@ -1,0 +1,10 @@
+C:\Users\Zeles\source\repos\NetProg6\NetProg6\bin\Debug\NetProg6.exe.config
+C:\Users\Zeles\source\repos\NetProg6\NetProg6\bin\Debug\NetProg6.exe
+C:\Users\Zeles\source\repos\NetProg6\NetProg6\bin\Debug\NetProg6.pdb
+C:\Users\Zeles\source\repos\NetProg6\NetProg6\obj\Debug\NetProg6.csprojAssemblyReference.cache
+C:\Users\Zeles\source\repos\NetProg6\NetProg6\obj\Debug\NetProg6.Form1.resources
+C:\Users\Zeles\source\repos\NetProg6\NetProg6\obj\Debug\NetProg6.Properties.Resources.resources
+C:\Users\Zeles\source\repos\NetProg6\NetProg6\obj\Debug\NetProg6.csproj.GenerateResource.cache
+C:\Users\Zeles\source\repos\NetProg6\NetProg6\obj\Debug\NetProg6.csproj.CoreCompileInputs.cache
+C:\Users\Zeles\source\repos\NetProg6\NetProg6\obj\Debug\NetProg6.exe
+C:\Users\Zeles\source\repos\NetProg6\NetProg6\obj\Debug\NetProg6.pdb

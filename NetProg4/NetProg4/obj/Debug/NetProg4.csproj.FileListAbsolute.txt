@@ -1,0 +1,9 @@
+C:\Users\Zeles\source\repos\NetProg4\NetProg4\obj\Debug\ChatClient.Form1.resources
+C:\Users\Zeles\source\repos\NetProg4\NetProg4\obj\Debug\NetProg4.Properties.Resources.resources
+C:\Users\Zeles\source\repos\NetProg4\NetProg4\obj\Debug\NetProg4.csproj.GenerateResource.cache
+C:\Users\Zeles\source\repos\NetProg4\NetProg4\obj\Debug\NetProg4.csproj.CoreCompileInputs.cache
+C:\Users\Zeles\source\repos\NetProg4\NetProg4\bin\Debug\NetProg4.exe.config
+C:\Users\Zeles\source\repos\NetProg4\NetProg4\bin\Debug\NetProg4.exe
+C:\Users\Zeles\source\repos\NetProg4\NetProg4\bin\Debug\NetProg4.pdb
+C:\Users\Zeles\source\repos\NetProg4\NetProg4\obj\Debug\NetProg4.exe
+C:\Users\Zeles\source\repos\NetProg4\NetProg4\obj\Debug\NetProg4.pdb
