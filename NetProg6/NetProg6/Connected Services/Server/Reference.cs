@@ -15,17 +15,23 @@ namespace NetProg6.Server {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Server.IService")]
     public interface IService {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/HelloUser")]
-        void HelloUser(string name);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddCard", ReplyAction="http://tempuri.org/IService/AddCardResponse")]
+        bool AddCard(long cardNum);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IService/HelloUser")]
-        System.Threading.Tasks.Task HelloUserAsync(string name);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AddCard", ReplyAction="http://tempuri.org/IService/AddCardResponse")]
+        System.Threading.Tasks.Task<bool> AddCardAsync(long cardNum);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Summator", ReplyAction="http://tempuri.org/IService/SummatorResponse")]
-        int Summator(int num1, int num2);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetBalance", ReplyAction="http://tempuri.org/IService/GetBalanceResponse")]
+        long GetBalance(long cardNum);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Summator", ReplyAction="http://tempuri.org/IService/SummatorResponse")]
-        System.Threading.Tasks.Task<int> SummatorAsync(int num1, int num2);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetBalance", ReplyAction="http://tempuri.org/IService/GetBalanceResponse")]
+        System.Threading.Tasks.Task<long> GetBalanceAsync(long cardNum);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ChangeCardBalance", ReplyAction="http://tempuri.org/IService/ChangeCardBalanceResponse")]
+        long ChangeCardBalance(long cardNum, long moneyToAdd);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ChangeCardBalance", ReplyAction="http://tempuri.org/IService/ChangeCardBalanceResponse")]
+        System.Threading.Tasks.Task<long> ChangeCardBalanceAsync(long cardNum, long moneyToAdd);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,20 +61,28 @@ namespace NetProg6.Server {
                 base(binding, remoteAddress) {
         }
         
-        public void HelloUser(string name) {
-            base.Channel.HelloUser(name);
+        public bool AddCard(long cardNum) {
+            return base.Channel.AddCard(cardNum);
         }
         
-        public System.Threading.Tasks.Task HelloUserAsync(string name) {
-            return base.Channel.HelloUserAsync(name);
+        public System.Threading.Tasks.Task<bool> AddCardAsync(long cardNum) {
+            return base.Channel.AddCardAsync(cardNum);
         }
         
-        public int Summator(int num1, int num2) {
-            return base.Channel.Summator(num1, num2);
+        public long GetBalance(long cardNum) {
+            return base.Channel.GetBalance(cardNum);
         }
         
-        public System.Threading.Tasks.Task<int> SummatorAsync(int num1, int num2) {
-            return base.Channel.SummatorAsync(num1, num2);
+        public System.Threading.Tasks.Task<long> GetBalanceAsync(long cardNum) {
+            return base.Channel.GetBalanceAsync(cardNum);
+        }
+        
+        public long ChangeCardBalance(long cardNum, long moneyToAdd) {
+            return base.Channel.ChangeCardBalance(cardNum, moneyToAdd);
+        }
+        
+        public System.Threading.Tasks.Task<long> ChangeCardBalanceAsync(long cardNum, long moneyToAdd) {
+            return base.Channel.ChangeCardBalanceAsync(cardNum, moneyToAdd);
         }
     }
 }

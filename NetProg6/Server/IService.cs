@@ -10,10 +10,13 @@ namespace Server
     [ServiceContract]
     public interface IService
     {
-        [OperationContract(IsOneWay = true)]
-        void HelloUser (string name);
+        [OperationContract]
+        bool AddCard(long cardNum);
 
         [OperationContract]
-        int Summator(int num1, int num2);
+        long GetBalance(long cardNum);
+
+        [OperationContract]
+        long ChangeCardBalance(long cardNum, long moneyToAdd);
     }
 }

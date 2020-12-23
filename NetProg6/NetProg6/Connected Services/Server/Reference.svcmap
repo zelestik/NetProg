@@ -19,13 +19,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8080/hello" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8080/cassService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="hello.xsd" MetadataType="Schema" ID="73cb189c-ae0a-47c7-99e4-cbb625bfc5bd" SourceId="1" SourceUrl="http://localhost:8080/hello?xsd=xsd1" />
-    <MetadataFile FileName="Service.wsdl" MetadataType="Wsdl" ID="cc5b5708-2c99-4c78-b077-9fa5843018f7" SourceId="1" SourceUrl="http://localhost:8080/hello?wsdl" />
-    <MetadataFile FileName="hello.disco" MetadataType="Disco" ID="174e6370-eca3-42c3-a325-67cd61c0d8a0" SourceId="1" SourceUrl="http://localhost:8080/hello?disco" />
-    <MetadataFile FileName="hello1.xsd" MetadataType="Schema" ID="d5a569c0-3690-4081-aaf0-43dc67b0bf4f" SourceId="1" SourceUrl="http://localhost:8080/hello?xsd=xsd0" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="2f8efbae-d113-473d-a2bc-1333ce212ca1" SourceId="1" SourceUrl="http://localhost:8080/cassService?wsdl" />
+    <MetadataFile FileName="cassService.xsd" MetadataType="Schema" ID="1084346b-2a24-4a3b-b9de-b345cdf8a1d0" SourceId="1" SourceUrl="http://localhost:8080/cassService?xsd=xsd0" />
+    <MetadataFile FileName="cassService1.xsd" MetadataType="Schema" ID="f4a707aa-f822-4477-948d-0348a1f34860" SourceId="1" SourceUrl="http://localhost:8080/cassService?xsd=xsd1" />
+    <MetadataFile FileName="cassService.disco" MetadataType="Disco" ID="82d34bfb-7c33-45ae-85b9-c6ff3cf597bc" SourceId="1" SourceUrl="http://localhost:8080/cassService?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

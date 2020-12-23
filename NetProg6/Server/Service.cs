@@ -11,15 +11,23 @@ namespace Server
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class Service : IService
     {
-        public void HelloUser(string UserName)
+        DB db = new DB();
+        public bool AddCard(long cardNum)
         {
-            Console.WriteLine("Привет" + UserName);
+            return db.AddCard(cardNum);
         }
 
-        public int Summator(int num1, int num2)
+        public long ChangeCardBalance(long cardNum, long moneyToAdd)
         {
-            Console.WriteLine("{0} + {1} = {2}", num1, num2, num1 + num2);
-            return num1 + num2;
+            if (db.ChangeBalance(cardNum, moneyToAdd))
+                return db.getBalance(cardNum);
+            else
+                return long.MinValue;
+        }
+
+        public long GetBalance(long cardNum)
+        {
+            return db.getBalance(cardNum);
         }
     }
 }

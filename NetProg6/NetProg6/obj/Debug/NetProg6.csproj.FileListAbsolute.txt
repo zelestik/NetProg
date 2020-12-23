@@ -8,3 +8,13 @@ C:\Users\Zeles\source\repos\NetProg6\NetProg6\obj\Debug\NetProg6.csproj.Generate
 C:\Users\Zeles\source\repos\NetProg6\NetProg6\obj\Debug\NetProg6.csproj.CoreCompileInputs.cache
 C:\Users\Zeles\source\repos\NetProg6\NetProg6\obj\Debug\NetProg6.exe
 C:\Users\Zeles\source\repos\NetProg6\NetProg6\obj\Debug\NetProg6.pdb
+D:\Zelestik\MPProjects\NetProg\NetProg6\NetProg6\bin\Debug\NetProg6.exe.config
+D:\Zelestik\MPProjects\NetProg\NetProg6\NetProg6\bin\Debug\NetProg6.exe
+D:\Zelestik\MPProjects\NetProg\NetProg6\NetProg6\bin\Debug\NetProg6.pdb
+D:\Zelestik\MPProjects\NetProg\NetProg6\NetProg6\obj\Debug\NetProg6.csprojAssemblyReference.cache
+D:\Zelestik\MPProjects\NetProg\NetProg6\NetProg6\obj\Debug\NetProg6.Form1.resources
+D:\Zelestik\MPProjects\NetProg\NetProg6\NetProg6\obj\Debug\NetProg6.Properties.Resources.resources
+D:\Zelestik\MPProjects\NetProg\NetProg6\NetProg6\obj\Debug\NetProg6.csproj.GenerateResource.cache
+D:\Zelestik\MPProjects\NetProg\NetProg6\NetProg6\obj\Debug\NetProg6.csproj.CoreCompileInputs.cache
+D:\Zelestik\MPProjects\NetProg\NetProg6\NetProg6\obj\Debug\NetProg6.exe
+D:\Zelestik\MPProjects\NetProg\NetProg6\NetProg6\obj\Debug\NetProg6.pdb

@@ -27,14 +27,56 @@ namespace NetProg6
             }
         }
 
-        private void buSend_Click(object sender, EventArgs e)
+        private void buGetBalance_Click(object sender, EventArgs e)
         {
-            service.HelloUser(tbMessage.Text);
+            if (tbCardNum.Text != "")
+            {
+                long balance = service.GetBalance(long.Parse(tbCardNum.Text));
+                if (balance != long.MinValue)
+                    laBalance.Text = "Баланс: " + balance.ToString();
+                else
+                    MessageBox.Show("Возможно карта не добавлена", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+                MessageBox.Show("Проверьте корректность ввода", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void buCalc_Click(object sender, EventArgs e)
+        private void buAddCard_Click(object sender, EventArgs e)
         {
-            laResult.Text = "=" + service.Summator(Int32.Parse(tbNum1.Text), Int32.Parse(tbNum2.Text)).ToString();
+            if (tbCardNum.Text != "")
+                if (service.AddCard(long.Parse(tbCardNum.Text)))
+                    MessageBox.Show("Карта добавлена", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("Ошибка добавления карты", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("Проверьте корректность ввода", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void buAddMoney_Click(object sender, EventArgs e)
+        {
+            if (tbCardNum.Text != "" && tbSumToChange.Text != "")
+            {
+                long balance = service.ChangeCardBalance(long.Parse(tbCardNum.Text), long.Parse(tbSumToChange.Text));
+                if (balance != long.MinValue)
+                    laBalance.Text = "Баланс: " + balance.ToString();
+                else
+                    MessageBox.Show("Возможно карта не добавлена", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+                MessageBox.Show("Проверьте корректность ввода", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        private void buMinusMoney_Click(object sender, EventArgs e)
+        {
+            if (tbCardNum.Text != "" && tbSumToChange.Text != "")
+            {
+                long balance = service.ChangeCardBalance(long.Parse(tbCardNum.Text), -long.Parse(tbSumToChange.Text));
+                if (balance != long.MinValue)
+                    laBalance.Text = "Баланс: " + balance.ToString();
+                else
+                    MessageBox.Show("Возможно карта не добавлена", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+                MessageBox.Show("Проверьте корректность ввода", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
