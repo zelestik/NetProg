@@ -122,7 +122,7 @@ namespace ChatClient
             }
             finally
             {
-                Close();
+                CloseSocket();
             }
         }
         // закрытие сокета

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Zelestik\\MPProjects\\NetProg\\NetProg4\\Server\\Server.csproj": {}
+    "D:\\Zelestik\\MPProjects\\NetProg\\NetProg5\\Server\\Server.csproj": {}
   },
   "projects": {
-    "D:\\Zelestik\\MPProjects\\NetProg\\NetProg4\\Server\\Server.csproj": {
+    "D:\\Zelestik\\MPProjects\\NetProg\\NetProg5\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Zelestik\\MPProjects\\NetProg\\NetProg4\\Server\\Server.csproj",
+        "projectUniqueName": "D:\\Zelestik\\MPProjects\\NetProg\\NetProg5\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "D:\\Zelestik\\MPProjects\\NetProg\\NetProg4\\Server\\Server.csproj",
+        "projectPath": "D:\\Zelestik\\MPProjects\\NetProg\\NetProg5\\Server\\Server.csproj",
         "packagesPath": "C:\\Users\\Zeles\\.nuget\\packages\\",
-        "outputPath": "D:\\Zelestik\\MPProjects\\NetProg\\NetProg4\\Server\\obj\\",
+        "outputPath": "D:\\Zelestik\\MPProjects\\NetProg\\NetProg5\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
