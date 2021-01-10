@@ -13,37 +13,36 @@ namespace Server
         public int Port;
         public string Username;
         public bool IsOnline = false;
+        public bool GetMsg;
         public User(int port, string username, bool isOnline)
         {
-            this.Port = port;
-            this.Username = username;
-            this.IsOnline = isOnline;
+            Port = port;
+            Username = username;
+            IsOnline = isOnline;
+            GetMsg = false;
         }
     }
 
     class Program
     {
-        static int servicesPort = 8350; // порт для обработки других действий
+        static readonly int servicesPort = 8350; // порт для обработки других действий
         static Socket listeningSocket;
-        static List<User> users = new List<User>();
+        public static List<User> users = new List<User>();
         static User admin;
         static User firstXOPlayer;
         static User secondXOPlayer;
         static int stepsCountXO = 0;
-        static void Main(string[] args)
+        static void Main()
         {
             try
             {
                 listeningSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-                //Task listeningTask = new Task(ListenForMessages);
-                //listeningTask.Start();
                 Task listeningTaskServices = new Task(ListenForService);
                 listeningTaskServices.Start();
                 Task timer = new Task(Timer);
                 timer.Start();
                 Console.WriteLine("Для выхода нажмите на любую кнопку");
                 Console.ReadKey();
-
             }
             catch (Exception ex)
             {
@@ -54,61 +53,6 @@ namespace Server
                 Close();
             }
         }
-
-        // поток для приема подключений
-        //private static void ListenForMessages()
-        //{
-        //    try
-        //    {
-        //        //Прослушиваем по адресу
-        //        IPEndPoint localIP = new IPEndPoint(IPAddress.Parse("127.0.0.1"), messagesPort);
-        //        listeningSocket.Bind(localIP);
-
-        //        while (true)
-        //        {
-        //            // получаем сообщение
-        //            StringBuilder builder = new StringBuilder();
-        //            int bytes = 0; // количество полученных байтов
-        //            byte[] data = new byte[256]; // буфер для получаемых данных
-
-        //            //адрес, с которого пришли данные
-        //            EndPoint remoteIp = new IPEndPoint(IPAddress.Any, 0);
-
-        //            do
-        //            {
-        //                bytes = listeningSocket.ReceiveFrom(data, ref remoteIp);
-        //                builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
-        //            }
-        //            while (listeningSocket.Available > 0);
-        //            // получаем данные о подключении
-        //            IPEndPoint remoteFullIp = remoteIp as IPEndPoint;
-                    
-        //            // выводим сообщение
-        //            foreach (var user in users)
-        //            {
-        //                if(user.Port == remoteFullIp.Port)
-        //                {
-        //                    string msg = DateTime.Now.ToShortTimeString() + " " + user.Username + ": " + builder.ToString();
-        //                    Console.WriteLine(msg);
-        //                    foreach (var userToSend in users)
-        //                    {
-        //                        byte[] dataToSend = Encoding.Unicode.GetBytes(msg);
-        //                        EndPoint remotePoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), userToSend.Port);
-        //                        listeningSocket.SendTo(dataToSend, remotePoint);
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine(ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        Close();
-        //    }
-        //}
         private static void ListenForService()
         {
             try
@@ -140,7 +84,7 @@ namespace Server
                     switch (SplittedInfo[0])
                     {
                         case "0": // приём и пересылка сообщений
-                            foreach (var user in users)
+                            foreach (User user in users)
                             {
                                 if (user.Port == remoteFullIp.Port)
                                 {
@@ -157,7 +101,10 @@ namespace Server
                         case "1": // регистрация пользователя
                             UserRegistration(SplittedInfo, remoteFullIp.Port);
                             if (admin != null)
-                                SendMsg(SplittedInfo[1] + " вошёл в чат", admin.Port);
+                            {
+                                SendMsg("0|" + SplittedInfo[1] + " вошёл в чат", admin.Port);
+                                SendUsers(admin.Port);
+                            }
                             break;
                         case "-1": // удаление пользователя
                             try
@@ -166,13 +113,16 @@ namespace Server
                                 if (userToDelete == admin)
                                 {
                                     admin = null;
-                                    Console.WriteLine(SplittedInfo[1] + " лишён прав администратора");
+                                    Console.WriteLine("0|" + SplittedInfo[1] + " лишён прав администратора");
                                 }
                                 if (admin != null)
-                                    SendMsg(userToDelete.Username + " вышел из чата", admin.Port);
+                                {
+                                    SendMsg("0|" + userToDelete.Username + " вышел из чата", admin.Port);
+                                    SendUsers(admin.Port);
+                                }
                                 userToDelete.IsOnline = false;
                                 users.Remove(userToDelete); // пока что здесь удаление, в дальнейшем планируется лишь пометка на переход в оффлайн (isOnline = false)
-                                usersChanged();
+                                UsersChanged();
                                 Console.WriteLine(SplittedInfo[1] + " оффлайн");
 
                             }
@@ -188,6 +138,7 @@ namespace Server
                                 {
                                     admin = users.Find(x => x.Username == SplittedInfo[1]);
                                     SendMsg("2|0|Права администратора получены", remoteFullIp.Port);
+                                    SendUsers(remoteFullIp.Port);
                                     Console.WriteLine("0| " + admin.Username + " получил права администратора");
                                     foreach (var userToSend in users)
                                     {
@@ -220,42 +171,95 @@ namespace Server
                                     if (firstXOPlayer is null)
                                     {
                                         firstXOPlayer = users.Find(x => x.Port == remoteFullIp.Port);
-                                        SendMsg("XO|2|Ожидайте второго игрока", remoteFullIp.Port);
+                                        SendMsg("XO|1|Ожидайте второго игрока", remoteFullIp.Port);
                                     }
                                     else if (secondXOPlayer is null)
                                     {
                                         secondXOPlayer = users.Find(x => x.Port == remoteFullIp.Port);
-                                        SendMsg("XO|0|Игра начинается", firstXOPlayer.Port);
-                                        SendMsg("XO|0|Игра начинается", secondXOPlayer.Port);
+                                        if (secondXOPlayer != firstXOPlayer)
+                                        {
+                                            SendMsg(
+                                                "XO|0|Игра начинается, вы ходите первым (Х)",
+                                                firstXOPlayer.Port
+                                            );
+                                            SendMsg(
+                                                    "XO|0|Игра начинается, вы ходите вторым (О)",
+                                                    secondXOPlayer.Port
+                                                );
+                                        } 
+                                        else
+                                        {
+                                            SendMsg(
+                                                "XO|1|Вы не можете играть самим с собой",
+                                                firstXOPlayer.Port
+                                            );
+                                            secondXOPlayer = null;
+                                        }
                                     }
                                     else
-                                        SendMsg("XO|1|Комната XO занята", remoteFullIp.Port);
+                                        SendMsg("XO|1|Комната занята", remoteFullIp.Port);
                                     break;
                                 case "End":
+                                    stepsCountXO = 0;
+                                    if (firstXOPlayer != null)
+                                    {
+                                        SendMsg("XO|2|Игра окончена", firstXOPlayer.Port);
+
+                                    }
+                                    else if (secondXOPlayer != null)
+                                    {
+                                        SendMsg("XO|2|Игра окончена", secondXOPlayer.Port);
+                                    }
                                     firstXOPlayer = null;
                                     secondXOPlayer = null;
-                                    stepsCountXO = 0;
-                                    SendMsg("XO|0|Игра окончена", firstXOPlayer.Port);
-                                    SendMsg("XO|0|Игра окончена", secondXOPlayer.Port);
                                     break;
                                 case "Play":
                                     if (firstXOPlayer != null && secondXOPlayer != null)
                                     {
-                                        if (firstXOPlayer.Port == remoteFullIp.Port && (stepsCountXO / 2) == 0)
+                                        if (firstXOPlayer.Port == remoteFullIp.Port && (stepsCountXO % 2) == 0)
                                         {
                                             stepsCountXO++;
-                                            SendMsg(str, secondXOPlayer.Port);
+                                            SendMsg(str + "|X|enabled", secondXOPlayer.Port);
+                                            SendMsg(str + "|X|disabled", firstXOPlayer.Port);
                                         }
-                                        else if (secondXOPlayer.Port == remoteFullIp.Port && (stepsCountXO / 2) != 0)
+                                        else if (secondXOPlayer.Port == remoteFullIp.Port && (stepsCountXO % 2) != 0)
                                         {
                                             stepsCountXO++;
-                                            SendMsg(str, firstXOPlayer.Port);
+                                            SendMsg(str + "|O|enabled", firstXOPlayer.Port);
+                                            SendMsg(str + "|O|disabled", secondXOPlayer.Port);
+                                        }
+                                        if (stepsCountXO == 9)
+                                        {
+                                            stepsCountXO = 0;
+                                            SendMsg("XO|2|Игра окончена", firstXOPlayer.Port);
+                                            SendMsg("XO|2|Игра окончена", secondXOPlayer.Port);
                                         }
                                     }
                                     break;
-
-
                             }
+                            break;
+                        case "Sound":
+                            string[] files = new string[2] { "1.mp3", "2.mp3" };
+                            Random rand = new Random();
+                            string FileName = files[rand.Next(2)];
+                            long length = new FileInfo(FileName).Length;
+                            SendMsg("File|" + FileName + "|" + length.ToString(), remoteFullIp.Port);
+                            SendFile(FileName, remoteFullIp.Port);
+                            break;
+                        case "UpdListUsers":
+                            string UserName = SplittedInfo[1];
+                            string UserPort = SplittedInfo[2];
+                            string UserFlag = SplittedInfo[3];
+                            User ChangeUser = users.Find(x => x.Port == int.Parse(UserPort));
+                            if ( UserFlag == "Checked")
+                            {
+                                ChangeUser.GetMsg = true;
+                            }
+                            else if (UserFlag == "Unchecked")
+                            {
+                                ChangeUser.GetMsg = false;
+                            }
+                            UsersChanged();
                             break;
                     }
                     
@@ -270,6 +274,11 @@ namespace Server
             {
                 Close();
             }
+        }
+        public static void SendUsers(int port)
+        {
+            string UserList = File.ReadAllText("users.txt");
+            SendMsg("Admin|" + UserList, port);
         }
 
         private static void UserRegistration(string[] SplittedInfo, int port)
@@ -290,7 +299,7 @@ namespace Server
                     return;
                 }
                 users.Add(new User(port, SplittedInfo[1], true));
-                usersChanged();
+                UsersChanged();
                 SendMsg("1|0|Пользователь успешно зарегистрирован", port);
             }
             catch (Exception e)
@@ -313,6 +322,20 @@ namespace Server
                 Console.WriteLine(e.Message);
             }
         }
+        private static void SendFile(string file, int port)
+        {
+            try
+            {
+                byte[] dataToSend = File.ReadAllBytes(file);
+                EndPoint remotePoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
+                int len = listeningSocket.SendTo(dataToSend, remotePoint);
+                Console.WriteLine(len);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
         // закрытие сокета
         private static void Close()
         {
@@ -324,7 +347,7 @@ namespace Server
             }
         }
 
-        public static void usersChanged()
+        static void UsersChanged()
         {
             var filename = "users.txt";
             try
@@ -332,7 +355,7 @@ namespace Server
                 string txt = "";
                 foreach(var user in users)
                 {
-                    txt += user.Username + "|" + user.Port + "\n";
+                    txt += user.Username + "/" + user.Port + "/" + user.GetMsg + "\n";
                 }
                 File.WriteAllText(filename, txt);
             }
@@ -345,15 +368,29 @@ namespace Server
         private static void Timer()
         {
             while (true) 
-            {  
-                if (DateTime.Now.Minute == 00)
+            {
+
+                if (DateTime.Now.Second == 00)
                 {
-                    foreach (var user in users) 
+                    string[] UserList = File.ReadAllText("users.txt").Split('\n');
+                    foreach(string user in UserList)
                     {
-                        SendMsg("0|Сервер: Сейчас" + DateTime.Now.ToShortTimeString(), user.Port);
+                        string[] UserInfo = user.Split('/');
+                        if (UserInfo.Length > 2 && UserInfo[2] == "False" && int.TryParse(UserInfo[1], out int UserInfoPort))
+                        {
+                            SendMsg(
+                                    "0|Сервер: " 
+                                    + "Дорогой " 
+                                    + UserInfo[0]   
+                                    + " сейчас" 
+                                    + DateTime.Now.ToShortTimeString(),
+                                    UserInfoPort
+                                );
+                        }
                     }
-                } 
-                System.Threading.Thread.Sleep(60000); 
+                }
+                 
+                System.Threading.Thread.Sleep(1000); 
             }
         }
     }

@@ -1,0 +1,48 @@
+C:\Users\Аня Мирченко\Desktop\сетевое программирование\Лабораторная №3\FileExchanger\FileExchanger\bin\Debug\FileExchanger.exe
+C:\Users\Аня Мирченко\Desktop\сетевое программирование\Лабораторная №3\FileExchanger\FileExchanger\bin\Debug\FileExchanger.pdb
+C:\Users\Аня Мирченко\Desktop\сетевое программирование\Лабораторная №3\FileExchanger\FileExchanger\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Аня Мирченко\Desktop\сетевое программирование\Лабораторная №3\FileExchanger\FileExchanger\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Аня Мирченко\Desktop\сетевое программирование\Лабораторная №3\FileExchanger\FileExchanger\obj\Debug\FileExchanger.csprojAssemblyReference.cache
+C:\Users\Аня Мирченко\Desktop\сетевое программирование\Лабораторная №3\FileExchanger\FileExchanger\obj\Debug\FileExchanger.Properties.Resources.resources
+C:\Users\Аня Мирченко\Desktop\сетевое программирование\Лабораторная №3\FileExchanger\FileExchanger\obj\Debug\FileExchanger.csproj.GenerateResource.cache
+C:\Users\Аня Мирченко\Desktop\сетевое программирование\Лабораторная №3\FileExchanger\FileExchanger\obj\Debug\FileExchanger.csproj.CoreCompileInputs.cache
+C:\Users\Аня Мирченко\Desktop\сетевое программирование\Лабораторная №3\FileExchanger\FileExchanger\obj\Debug\FileExchanger.csproj.CopyComplete
+C:\Users\Аня Мирченко\Desktop\сетевое программирование\Лабораторная №3\FileExchanger\FileExchanger\obj\Debug\FileExchanger.exe
+C:\Users\Аня Мирченко\Desktop\сетевое программирование\Лабораторная №3\FileExchanger\FileExchanger\obj\Debug\FileExchanger.pdb
+C:\Users\Аня Мирченко\Desktop\сетевое программирование\Лабораторная №3\FileExchanger\FileExchanger\obj\Debug\FileExchanger.Authorization.resources
+C:\Users\Аня Мирченко\Desktop\сетевое программирование\Лабораторная №3\FileExchanger\FileExchanger\obj\Debug\FileExchanger.Registration.resources
+C:\Users\Аня Мирченко\Desktop\сетевое программирование\Лабораторная №3\FileExchanger\FileExchanger\obj\Debug\FileExchanger.MainPage_admin.resources
+C:\Users\Аня Мирченко\Desktop\сетевое программирование\Лабораторная №3\FileExchanger\FileExchanger\obj\Debug\FileExchanger.SimpleAdmin.resources
+C:\Users\Аня Мирченко\Desktop\сетевое программирование\Лабораторная №3\FileExchanger\FileExchanger\obj\Debug\FileExchanger.UserPage.resources
+C:\Users\snake\source\repos\FileExchanger\FileExchanger\bin\Debug\FileExchanger.exe
+C:\Users\snake\source\repos\FileExchanger\FileExchanger\bin\Debug\FileExchanger.pdb
+C:\Users\snake\source\repos\FileExchanger\FileExchanger\bin\Debug\Newtonsoft.Json.dll
+C:\Users\snake\source\repos\FileExchanger\FileExchanger\bin\Debug\Newtonsoft.Json.xml
+C:\Users\snake\source\repos\FileExchanger\FileExchanger\obj\Debug\FileExchanger.csprojAssemblyReference.cache
+C:\Users\snake\source\repos\FileExchanger\FileExchanger\obj\Debug\FileExchanger.Authorization.resources
+C:\Users\snake\source\repos\FileExchanger\FileExchanger\obj\Debug\FileExchanger.MainPage_admin.resources
+C:\Users\snake\source\repos\FileExchanger\FileExchanger\obj\Debug\FileExchanger.Registration.resources
+C:\Users\snake\source\repos\FileExchanger\FileExchanger\obj\Debug\FileExchanger.Properties.Resources.resources
+C:\Users\snake\source\repos\FileExchanger\FileExchanger\obj\Debug\FileExchanger.SimpleAdmin.resources
+C:\Users\snake\source\repos\FileExchanger\FileExchanger\obj\Debug\FileExchanger.UserPage.resources
+C:\Users\snake\source\repos\FileExchanger\FileExchanger\obj\Debug\FileExchanger.csproj.GenerateResource.cache
+C:\Users\snake\source\repos\FileExchanger\FileExchanger\obj\Debug\FileExchanger.csproj.CoreCompileInputs.cache
+C:\Users\snake\source\repos\FileExchanger\FileExchanger\obj\Debug\FileExchanger.csproj.CopyComplete
+C:\Users\snake\source\repos\FileExchanger\FileExchanger\obj\Debug\FileExchanger.exe
+C:\Users\snake\source\repos\FileExchanger\FileExchanger\obj\Debug\FileExchanger.pdb
+D:\Zelestik\Desktop\1\LabWebProgramme_3\FileExchanger\bin\Debug\FileExchanger.exe
+D:\Zelestik\Desktop\1\LabWebProgramme_3\FileExchanger\bin\Debug\FileExchanger.pdb
+D:\Zelestik\Desktop\1\LabWebProgramme_3\FileExchanger\bin\Debug\Newtonsoft.Json.dll
+D:\Zelestik\Desktop\1\LabWebProgramme_3\FileExchanger\bin\Debug\Newtonsoft.Json.xml
+D:\Zelestik\Desktop\1\LabWebProgramme_3\FileExchanger\obj\Debug\FileExchanger.csprojAssemblyReference.cache
+D:\Zelestik\Desktop\1\LabWebProgramme_3\FileExchanger\obj\Debug\FileExchanger.Authorization.resources
+D:\Zelestik\Desktop\1\LabWebProgramme_3\FileExchanger\obj\Debug\FileExchanger.MainPage_admin.resources
+D:\Zelestik\Desktop\1\LabWebProgramme_3\FileExchanger\obj\Debug\FileExchanger.Registration.resources
+D:\Zelestik\Desktop\1\LabWebProgramme_3\FileExchanger\obj\Debug\FileExchanger.Properties.Resources.resources
+D:\Zelestik\Desktop\1\LabWebProgramme_3\FileExchanger\obj\Debug\FileExchanger.SimpleAdmin.resources
+D:\Zelestik\Desktop\1\LabWebProgramme_3\FileExchanger\obj\Debug\FileExchanger.UserPage.resources
+D:\Zelestik\Desktop\1\LabWebProgramme_3\FileExchanger\obj\Debug\FileExchanger.csproj.GenerateResource.cache
+D:\Zelestik\Desktop\1\LabWebProgramme_3\FileExchanger\obj\Debug\FileExchanger.csproj.CoreCompileInputs.cache
+D:\Zelestik\Desktop\1\LabWebProgramme_3\FileExchanger\obj\Debug\FileExchanger.csproj.CopyComplete
+D:\Zelestik\Desktop\1\LabWebProgramme_3\FileExchanger\obj\Debug\FileExchanger.exe
+D:\Zelestik\Desktop\1\LabWebProgramme_3\FileExchanger\obj\Debug\FileExchanger.pdb

@@ -18,3 +18,14 @@ D:\Zelestik\MPProjects\NetProg\NetProg5\NetProg4\obj\Debug\NetProg4.csproj.CoreC
 D:\Zelestik\MPProjects\NetProg\NetProg5\NetProg4\obj\Debug\NetProg4.exe
 D:\Zelestik\MPProjects\NetProg\NetProg5\NetProg4\obj\Debug\NetProg4.pdb
 D:\Zelestik\MPProjects\NetProg\NetProg5\NetProg4\obj\Debug\NetProg4.fmXO.resources
+C:\Users\snake\source\repos\NetProg5\NetProg4\bin\Debug\NetProg4.exe.config
+C:\Users\snake\source\repos\NetProg5\NetProg4\bin\Debug\NetProg4.exe
+C:\Users\snake\source\repos\NetProg5\NetProg4\bin\Debug\NetProg4.pdb
+C:\Users\snake\source\repos\NetProg5\NetProg4\obj\Debug\NetProg4.csprojAssemblyReference.cache
+C:\Users\snake\source\repos\NetProg5\NetProg4\obj\Debug\NetProg4.fmXO.resources
+C:\Users\snake\source\repos\NetProg5\NetProg4\obj\Debug\ChatClient.Form1.resources
+C:\Users\snake\source\repos\NetProg5\NetProg4\obj\Debug\NetProg4.Properties.Resources.resources
+C:\Users\snake\source\repos\NetProg5\NetProg4\obj\Debug\NetProg4.csproj.GenerateResource.cache
+C:\Users\snake\source\repos\NetProg5\NetProg4\obj\Debug\NetProg4.csproj.CoreCompileInputs.cache
+C:\Users\snake\source\repos\NetProg5\NetProg4\obj\Debug\NetProg4.exe
+C:\Users\snake\source\repos\NetProg5\NetProg4\obj\Debug\NetProg4.pdb

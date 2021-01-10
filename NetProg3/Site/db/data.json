@@ -1,0 +1,222 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "login": "login",
+      "password": "password",
+      "role": 1
+    },
+    {
+      "id": 2,
+      "login": "amrchnk",
+      "password": "password",
+      "role": 1
+    },
+    {
+      "id": 3,
+      "login": "login1",
+      "password": "password1",
+      "role": 4
+    },
+    {
+      "id": 5,
+      "login": "admin",
+      "password": "111",
+      "role": 2
+    },
+    {
+      "id": 6,
+      "login": "test",
+      "password": "222",
+      "role": 2
+    },
+    {
+      "login": "joj",
+      "password": "joj",
+      "role": 2,
+      "id": 7
+    },
+    {
+      "login": "admin2",
+      "password": "111",
+      "role": 2,
+      "id": 8
+    },
+    {
+      "id": 9,
+      "login": "joj2",
+      "password": "111",
+      "role": 4
+    },
+    {
+      "id": 10,
+      "login": "lol",
+      "password": "111",
+      "role": 2
+    },
+    {
+      "login": "nif-nif",
+      "password": "wolf",
+      "role": 3,
+      "id": 11
+    },
+    {
+      "login": "test",
+      "password": "test",
+      "role": 3,
+      "id": 12
+    },
+    {
+      "login": "anya",
+      "password": "123",
+      "role": 3,
+      "id": 13
+    },
+    {
+      "login": "test2",
+      "password": "123",
+      "role": 3,
+      "id": 14
+    },
+    {
+      "login": "pasha",
+      "password": "123",
+      "role": 3,
+      "id": 15
+    },
+    {
+      "login": "adel",
+      "password": "123",
+      "role": 3,
+      "id": 16
+    },
+    {
+      "login": "siraj",
+      "password": "123",
+      "role": 3,
+      "id": 17
+    },
+    {
+      "login": "alena",
+      "password": "123",
+      "role": 3,
+      "id": 18
+    }
+  ],
+  "roles": [
+    {
+      "id": 2,
+      "name": "admin"
+    },
+    {
+      "id": 1,
+      "name": "super-admin"
+    },
+    {
+      "id": 3,
+      "name": "user"
+    },
+    {
+      "id": 4,
+      "name": "locked"
+    }
+  ],
+  "files": [
+    {
+      "id_user": 12,
+      "name_file": "0pjwbCIUGCA.jpg",
+      "status_file": "public",
+      "text": "test",
+      "id": 1
+    },
+    {
+      "name_file": "cznR7p3NpEw.jpg",
+      "status_file": "public",
+      "text": "text",
+      "id": 2
+    },
+    {
+      "name_file": "cznR7p3NpEw.jpg",
+      "status_file": "public",
+      "text": "text",
+      "id": 3
+    },
+    {
+      "id_user": 17,
+      "name_file": "samurai-girl-smoking-11-4k.jpg",
+      "status_file": "private",
+      "text": "text",
+      "id": 7
+    },
+    {
+      "id_user": 18,
+      "name_file": "0pjwbCIUGCA.jpg",
+      "status_file": "private",
+      "text": "текст",
+      "id": 10
+    },
+    {
+      "id_user": 18,
+      "name_file": "world-of-warcraft--shadowlands-4k-ro-3840x2400.jpg",
+      "status_file": "public",
+      "text": "текст",
+      "id": 12
+    },
+    {
+      "id_user": 13,
+      "name_file": "cznR7p3NpEw.jpg",
+      "status_file": "private",
+      "text": "adad",
+      "id": 13
+    },
+    {
+      "id_user": 13,
+      "name_file": "1200px-C_Sharp_wordmark.svg.png",
+      "status_file": "public",
+      "text": "newtxt",
+      "id": 14
+    },
+    {
+      "id_user": 20,
+      "name_file": "take_cat.gif",
+      "status_file": "public",
+      "text": "dwad",
+      "id": 15
+    },
+    {
+      "id_user": 20,
+      "name_file": "take_cat.gif",
+      "status_file": "public",
+      "text": "dwad",
+      "id": 16
+    },
+    {
+      "id_user": 13,
+      "name_file": "wrench_head_fix_icon_145915.ico",
+      "status_file": "private",
+      "text": "dawd",
+      "id": 17
+    },
+    {
+      "id_user": 13,
+      "name_file": "fon.png",
+      "status_file": "public",
+      "text": "зтп",
+      "id": 18
+    },
+    {
+      "id_user": 13,
+      "name_file": "head_fon.png",
+      "status_file": "public",
+      "text": "зтп",
+      "id": 19
+    },
+    {
+      "id_user": 13,
+      "name_file": "S2.zip",
+      "status_file": "public",
+      "text": "adaed",
+      "id": 20
+    }
+  ]
+}

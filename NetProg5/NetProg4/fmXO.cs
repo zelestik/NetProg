@@ -13,55 +13,92 @@ namespace NetProg4
 {
     public partial class fmXO : Form
     {
-        int startX = 10;
-        int startY = 10;
-        string btnToSend = "";
-        public string playerSymbol = "";
-        Button[,] field = new Button[3, 3];
-        Form1 mainForm;
+        readonly int startX = 10;
+        readonly int startY = 10;
+        readonly Button[,] field = new Button[3, 3];
+        readonly Form1 MainForm;
 
         public fmXO(Form1 mainForm)
         {
             InitializeComponent();
-            this.mainForm = mainForm;
-            for (int i = 0; i < 3; i++)
+            MainForm = mainForm;
+            for (int i = 0; i < field.GetLength(0); i++)
             {
-                for(int j = 0; j < 3; j++)
+                for(int j = 0; j < field.GetLength(1); j++)
                 {
                     field[i, j] = new Button();
-                    this.Controls.Add(field[i, j]);
-                    field[i, j].Location = new Point(startX + i * field[i, j].Size.Width, startY + j * field[i, j].Size.Height);
-                    field[i, j].Click += fieldBtn_Click;
+                    Controls.Add(field[i, j]);
+                    field[i, j].Location = new Point
+                        (
+                            startX + i * field[i, j].Size.Width, 
+                            startY + j * field[i, j].Size.Height
+                        );
+                    field[i, j].Click += FieldBtn_Click;
                     field[i, j].Name = i + "|" + j;
                 }
             }
+
         }
 
-        private void fieldBtn_Click(object sender, EventArgs e)
+        private void FieldBtn_Click(object sender, EventArgs e)
         {
             if (sender is Button btn)
             {
-                btnToSend = btn.Name;
-                btn.Text = playerSymbol;
+                MainForm.SendMsg("XO|Play|" + btn.Name);
             }
         }
 
-        public void ChangeFieldInstance()
+        public void AppendPropsBtn(
+                int BtnX, 
+                int BtnY,
+                string PlayerSymbol,
+                string enable
+            ) 
         {
-            InitializeComponent();
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
+            Invoke(
+                (MethodInvoker)delegate
                 {
-                    if (field[i, j].Text == "")
-                        field[i, j].Enabled = !field[i, j].Enabled;
+                    if (enable == "enabled")
+                    {
+                        foreach (Button btn in field)
+                        {
+                            if (btn.Text.Length == 0)
+                            {
+                                btn.Enabled = true;
+                            }
+                        }
+                    }
+                    else if (enable == "disabled")
+                    {
+                        foreach (Button btn in field)
+                        {
+                            if (btn.Text.Length == 0)
+                            {
+                                btn.Enabled = false;
+                            }
+                        }
+                    }
+                    field[BtnX, BtnY].Text = PlayerSymbol;
+                    field[BtnX, BtnY].Enabled = false;
                 }
-            }
+            );
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void FmXO_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //mainForm.SendMsg("XO|Play|")ж
+            e.Cancel = true;
+            HideWindow();
+        }
+
+        public void HideWindow()
+        {
+            Hide();
+            foreach (Button btn in field)
+            {
+                btn.Text = "";
+                btn.Enabled = true;
+            }
+            MainForm.SendMsg("XO|End");
         }
     }
 }

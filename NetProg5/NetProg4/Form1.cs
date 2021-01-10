@@ -1,32 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Sockets;
-using System.Windows;
-using System.Windows.Input;
-using System.IO;
 using System.Net;
 using NetProg4;
+using System.IO;
+using System.Diagnostics;
 
 namespace ChatClient
 {
     public partial class Form1 : Form
     {
-        static int remotePort = 8350; // порт для отправки сообщений
+        readonly static int RemotePort = 8350; // порт для отправки сообщений
         static Socket listeningSocket;
         bool isConnectionStarted = false;
         bool isConnected = false;
-        bool isAdmin = false;
+        readonly fmXO FormXO;
+        public string FileName = null;
+        public int tst = 0;
+        public int filesize = 255;
+        // bool IsAdmin;
 
         public Form1()
         {
             InitializeComponent();
+            FormXO = new fmXO(this);
         }
 
         void ConnectUser()
@@ -41,6 +41,8 @@ namespace ChatClient
                 buGetAdmin.Enabled = true;
                 bConnDicon.Text = "Отключиться";
                 isConnectionStarted = true;
+                buXO.Enabled = true;
+                GetSound.Visible = true;
             }
         }
 
@@ -51,7 +53,7 @@ namespace ChatClient
                 if (isConnected)
                 {
                     byte[] data1 = Encoding.Unicode.GetBytes("-1|" + tbUser.Text);
-                    EndPoint remotePoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), remotePort);
+                    EndPoint remotePoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), RemotePort);
                     listeningSocket.SendTo(data1, remotePoint);
                     isConnected = false;
                 }
@@ -59,9 +61,10 @@ namespace ChatClient
                 tbPort.Enabled = true;
                 bConnDicon.Text = "Подключиться";
                 isConnectionStarted = false;
-                isAdmin = false;
+                // IsAdmin = false;
                 buGetAdmin.Enabled = false;
                 adminPanel.Enabled = false;
+                buXO.Enabled = false;
                 CloseSocket();
             }
 
@@ -85,12 +88,12 @@ namespace ChatClient
             lvMessages.Items.Add(msg);
         }
 
-        private void tbMessage_KeyDown(object sender, KeyEventArgs e)
+        private void MessageTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 byte[] data = Encoding.Unicode.GetBytes("0|" + tbMessage.Text);
-                EndPoint remotePoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), remotePort);
+                EndPoint remotePoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), RemotePort);
                 listeningSocket.SendTo(data, remotePoint);
                 tbMessage.Text = string.Empty;
             }
@@ -110,26 +113,51 @@ namespace ChatClient
                 listeningSocket.Bind(localIP);
 
                 byte[] data1 = Encoding.Unicode.GetBytes("1|" + tbUser.Text);
-                EndPoint remotePoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), remotePort);
+                EndPoint remotePoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), RemotePort);
                 listeningSocket.SendTo(data1, remotePoint);
                 while (true)
                 {
                     // получаем сообщение
                     StringBuilder builder = new StringBuilder();
                     int bytes = 0; // количество полученных байтов
-                    byte[] data = new byte[256]; // буфер для получаемых данных
+                    byte[] data = new byte[filesize + 50]; // буфер для получаемых данных
 
                     //адрес, с которого пришли данные
                     EndPoint remoteIp = new IPEndPoint(IPAddress.Any, 0);
-
+                    
                     do
                     {
                         bytes = listeningSocket.ReceiveFrom(data, ref remoteIp);
-                        builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                        if (FileName == null)
+                        {
+                            builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+                        } 
+                        else
+                        {
+                            string path = "";
+                            File.WriteAllBytes(path + FileName, data);                           
+                        }
                     }
                     while (listeningSocket.Available > 0);
                     string str = builder.ToString();
-                    string[] SplittedInfo = str.Split('|');
+                    string[] SplittedInfo = new string[32];
+                    if (FileName == null)
+                    {
+                        SplittedInfo = str.Split('|');
+                    } 
+                    else
+                    {
+                        string path =  FileName;
+
+                        if (File.Exists(string.Format(path, string.Empty)))
+                            Process.Start(string.Format(path, string.Empty));
+                        else if (File.Exists(string.Format(path, " (x86)")))
+                            Process.Start(string.Format(path, " (x86)"));
+                        else
+                            MessageBox.Show("Ошибка файл не найден ", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        FileName = null;
+                        filesize = 255;
+                    }
                     // получаем данные о подключении
                     IPEndPoint remoteFullIp = remoteIp as IPEndPoint;
                     switch (SplittedInfo[0])
@@ -145,18 +173,39 @@ namespace ChatClient
                                 {
                                     case "0":
                                         isConnected = true;
-                                        MessageBox.Show(SplittedInfo[2], "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        new Task(() =>
+                                        {
+                                            MessageBox.Show(
+                                                    SplittedInfo[2], "Успешно", 
+                                                    MessageBoxButtons.OK,
+                                                    MessageBoxIcon.Information
+                                                );
+                                        }).Start();
                                         break;
                                     case "1":
                                         DisconnectUser();
-                                        MessageBox.Show(SplittedInfo[2], "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        new Task(() => {
+                                            MessageBox.Show(
+                                                    SplittedInfo[2], 
+                                                    "Ошибка", 
+                                                    MessageBoxButtons.OK, 
+                                                    MessageBoxIcon.Error
+                                                );
+                                        }).Start();
                                         break;
                                 }
                             }
                             catch(Exception e)
                             {
                                 DisconnectUser();
-                                MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                new Task(() => {
+                                    MessageBox.Show(
+                                            e.Message, 
+                                            "Ошибка", 
+                                            MessageBoxButtons.OK, 
+                                            MessageBoxIcon.Error
+                                        );
+                                }).Start();
                             }
                             break;
                         case "2":
@@ -165,7 +214,7 @@ namespace ChatClient
                                 switch (SplittedInfo[1])
                                 {
                                     case "0":
-                                        isAdmin = true;
+                                        // IsAdmin = true;
                                         buGetAdmin.Invoke(new Action(() => { buGetAdmin.Enabled = false; }));
                                         adminPanel.Invoke(new Action(() => { adminPanel.Enabled = true; }));
                                         MessageBox.Show(SplittedInfo[2], "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -186,25 +235,25 @@ namespace ChatClient
                             {
                                 switch (SplittedInfo[1]) {
                                     case "White":
-                                        this.Invoke(new Action(() => { this.BackColor = Color.White; }));
-                                        foreach (var control in this.Controls)
+                                        Invoke(new Action(() => { BackColor = Color.White; }));
+                                        foreach (Control control in Controls)
                                         {
                                             if (control is Label label)
                                                 label.ForeColor = Color.Black;
                                             else if (control is Panel panel)
-                                                foreach (var cop in panel.Controls)
+                                                foreach (Control cop in panel.Controls)
                                                     if (cop is Label lab)
                                                         lab.ForeColor = Color.Black;
                                         }
                                         break;
                                     case "Black":
-                                        this.Invoke(new Action(() => { this.BackColor = Color.Black; }));
-                                        foreach (var control in this.Controls)
+                                        Invoke(new Action(() => { BackColor = Color.Black; }));
+                                        foreach (Control control in Controls)
                                         {
                                             if (control is Label label)
                                                 label.ForeColor = Color.White;
                                             else if (control is Panel panel)
-                                                foreach (var cop in panel.Controls)
+                                                foreach (Control cop in panel.Controls)
                                                     if (cop is Label lab)
                                                         lab.ForeColor = Color.White;
                                         }
@@ -215,6 +264,51 @@ namespace ChatClient
                             {
                                 MessageBox.Show("Не удалось изменить цвет окна");
                             }
+                            break;
+                        case "XO":
+                            switch (SplittedInfo[1])
+                            {
+                                case "Play":
+                                    FormXO.AppendPropsBtn(
+                                            int.Parse(SplittedInfo[2]),
+                                            int.Parse(SplittedInfo[3]),
+                                            SplittedInfo[4],
+                                            SplittedInfo[5]
+                                        );
+                                    break;
+                                case "0":
+                                    MessageBox.Show(SplittedInfo[2]);
+                                    Invoke(new Action(() =>
+                                    {
+                                        FormXO.Show();
+                                    }));
+                                    break;
+                                case "1":
+                                    MessageBox.Show(SplittedInfo[2]);
+                                    break;
+                                case "2":
+                                    MessageBox.Show(SplittedInfo[2]);
+                                    FormXO.Invoke(
+                                            (MethodInvoker) delegate
+                                            {
+                                                FormXO.HideWindow();
+                                            }
+                                        );
+                                    break;
+                            }
+                            break;
+                        case "File":
+                            FileName = SplittedInfo[1];
+                            int.TryParse(SplittedInfo[2], out filesize);
+                            break;
+                        case "Admin":
+                            string ChaosListUser = SplittedInfo[1];
+                            Invoke(
+                                    (MethodInvoker)delegate
+                                    {
+                                        FillControlForm(ChaosListUser);
+                                    }
+                                );
                             break;
                     }
                 }
@@ -228,12 +322,33 @@ namespace ChatClient
                 CloseSocket();
             }
         }
-        public static void SendMsg(string msg)
+
+        public void FillControlForm(string users)
+        {
+            UsersCheckBox.Items.Clear();
+            string[] UserList = users.Split('\n');
+
+            foreach (string user in UserList)
+            {
+                string[] UserInfo = user.Split('/');
+                if (UserInfo.Length > 2)
+                {
+                    int i = UsersCheckBox.Items.Add(UserInfo[0] + "|" + UserInfo[1]);
+                    if (bool.TryParse(UserInfo[2], out bool CheckedValue))
+                    {
+                        UsersCheckBox.SetItemChecked(i, CheckedValue);
+                    }
+                }
+            }
+
+            
+        }
+        public void SendMsg(string msg)
         {
             try
             {
                 byte[] dataToSend = Encoding.Unicode.GetBytes(msg);
-                EndPoint remotePoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), remotePort);
+                EndPoint remotePoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), RemotePort);
                 listeningSocket.SendTo(dataToSend, remotePoint);
             }
             catch (Exception e)
@@ -251,26 +366,34 @@ namespace ChatClient
             }
         }
 
-        private void buGetAdmin_Click(object sender, EventArgs e)
+        private void BuGetAdmin_Click(object sender, EventArgs e)
         {
             SendMsg("2|"+ tbUser.Text);
         }
 
-        private void buBlack_Click(object sender, EventArgs e)
+        private void BuBlack_Click(object sender, EventArgs e)
         {
             SendMsg("3|Black");
         }
 
-        private void buWhite_Click(object sender, EventArgs e)
+        private void BuWhite_Click(object sender, EventArgs e)
         {
             SendMsg("3|White");
         }
 
-        private void buXO_Click(object sender, EventArgs e)
+        private void BuXO_Click(object sender, EventArgs e)
         {
             SendMsg("XO|Start");
-            var fm = new fmXO(this);
-            fm.Show();
+        }
+
+        private void GetSound_Click(object sender, EventArgs e)
+        {
+            SendMsg("Sound");
+        }
+
+        private void UsersCheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            SendMsg("UpdListUsers|" + UsersCheckBox.Items[e.Index].ToString() + "|" + e.NewValue.ToString());
         }
     }
 }
